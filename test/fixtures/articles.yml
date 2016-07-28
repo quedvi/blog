@@ -7,3 +7,7 @@ one:
 two:
   title: MyString
   text: MyText
+
+delete:
+  title: Test case for delete
+  text: Text body for delete
