@@ -1,21 +1,50 @@
 <h1>Listing Articles</h1>
-<%= link_to 'New article', new_article_path %>
+<% if user_signed_in? then %>
+  <%= link_to 'Logout', destroy_user_session_path,
+              method: :delete,
+              data: {confirm: 'Are you sure you want to Logout?'} %>
+  <%= current_user.email %>
+  <% else %>
+  <%= link_to 'Login', new_user_session_path %>
+<% end %>
+
+<br/>
+<br/>
 <table>
   <tr>
+    <th>ID</th>
     <th>Title</th>
     <th>Text</th>
-    <th colspan="3"></th>
+    <% if is_admin? then %>
+      <th colspan="2"></th>
+    <% else %>
+      <th></th>
+    <% end %>
   </tr>
 
   <% @articles.each do |article| %>
     <tr>
-      <td><%= article.title %></td>
-      <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
-      <td><%= link_to 'Destroy', article_path(article),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
+      <td><%= article.id %></td>
+      <td><%= link_to article.title, article_path(article) %></td>
+      <td><%= truncate(article.text, length: 30).html_safe %></td>
+      <% if is_admin? then %>
+            <td><%= link_to 'Edit', edit_article_path(article) %></td>
+            <td><%= link_to 'Destroy', article_path(article),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
     </tr>
   <% end %>
+    <tr>
+      <% if is_admin? then %>
+        <td align = 'right' colspan="5">
+          <%= link_to 'New article', new_article_path %>
+        </td>
+      <% end %>
+
+    </tr>
 </table>
+<br/>
+<%= paginate @articles %>
+<br/>
+<%= page_entries_info @articles %>
