@@ -13,4 +13,15 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def rps
+    @choice = :X
+    if params['choice']
+      @choice = params['choice'].to_sym
+    end
+    @choice_comp = WelcomeHelper::RPSSL.play
+    if WelcomeHelper::RPSSL.valid?(@choice)
+      @results = WelcomeHelper::RPSSL.evaluate(@choice, @choice_comp)
+    end
+  end
+
 end

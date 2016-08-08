@@ -1,0 +1,68 @@
+<h2>Rock-Paper-Scissors-Lizard-Spock</h2>
+<br/>
+
+<%# user input %>
+<b>Your choice:</b>
+<br/>
+<br/>
+<table>
+  <tr>
+    <td <% if @choice == :A then %> bgcolor = #000000 <%end%>> </td>
+    <td <% if @choice == :B then %> bgcolor = #000000 <%end%>> </td>
+    <td <% if @choice == :C then %> bgcolor = #000000 <%end%>> </td>
+    <td <% if @choice == :E then %> bgcolor = #000000 <%end%>> </td>
+    <td <% if @choice == :D then %> bgcolor = #000000 <%end%>> </td>
+  </tr>
+  <tr>
+    <td><%= link_to(image_tag( "rock.jpg", size: "100x100", alt: "Rock" ), rps_path(choice: :A)) %></td>
+    <td><%= link_to(image_tag( "paper.jpg", size: "100x100", alt: "Paper" ), rps_path(choice: :B)) %></td>
+    <td><%= link_to(image_tag( "scissors.jpg", size: "100x100", alt: "Scissors" ), rps_path(choice: :C)) %></td>
+    <td><%= link_to(image_tag( "lizard.jpg", size: "100x100", alt: "Lizard" ), rps_path(choice: :E)) %></td>
+    <td><%= link_to(image_tag( "spock.jpg", size: "100x100", alt: "Spock" ), rps_path(choice: :D)) %></td>
+  </tr>
+  <tr>
+    <td <% if @choice == :A then %> bgcolor = #000000 <%end%>> </td>
+    <td <% if @choice == :B then %> bgcolor = #000000 <%end%>> </td>
+    <td <% if @choice == :C then %> bgcolor = #000000 <%end%>> </td>
+    <td <% if @choice == :E then %> bgcolor = #000000 <%end%>> </td>
+    <td <% if @choice == :D then %> bgcolor = #000000 <%end%>> </td>
+  </tr>
+  <tr><td colspan = "5">&nbsp;</td></tr>
+  <tr><td colspan = "5">&nbsp;</td></tr>
+  <tr><td colspan = "5">&nbsp;</td></tr>
+
+  <%# output results  %>
+  <% if WelcomeHelper::RPSSL.valid?(@choice) then %>
+    <tr>
+      <td></td>
+      <td <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %> bgcolor = #000000 <%end%>>
+      </td>
+      <td colspan = "2"></td>
+      <td <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %> bgcolor = #000000 <%end%>></td>
+    </tr>
+    <tr>
+      <td><h2><b><%= "#{@results[3]}:" %>&nbsp;&nbsp;</b></h2>
+      </td>
+      <td>
+        <%= image_tag( "#{@results[0].downcase}.jpg", size: "100x100", alt: "#{@results[0]}" ) %>
+      </td>
+      <td colspan = "2" align = "center">
+        <h2><b><%= "#{@results[1]}" %></b></h2>
+      </td>
+      <td>
+        <%= image_tag( "#{@results[2].downcase}.jpg", size: "100x100", alt: "#{@results[2]}" ) %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %> bgcolor = #000000 <%end%>>
+      </td>
+      <td colspan = "2"></td>
+      <td <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %> bgcolor = #000000 <%end%>></td>
+    </tr>
+  <% end %>
+</table>
+<br/>
+<br/>
+<br/>
+<%= link_to('Back', controller: 'welcome') %>

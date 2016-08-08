@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/welcome(/:year(/:month))' => "welcome#index", :as => 'calendar'
+  get '/rps(/:choice)' => "welcome#rps", :as => 'rps'
 
   resources :articles do
     get 'page/:page', :action => :index, :on => :collection

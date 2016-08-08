@@ -1,5 +1,6 @@
 module WelcomeHelper
 
+# helper for calendar
   def mo_calendar ( year, month )
 
     current_month = Date.new( year, month, 1 )
@@ -83,6 +84,48 @@ module WelcomeHelper
     else
       return ( Date.new( year, month+1, 1 ) - Date.new( year, month, 1 ) ).to_i
     end
+  end
+
+
+# helper for Rock-Paper-Scissors-Lizard-Spock
+  class RPSSL
+    @@rps = {
+      A: "Rock",
+      B: "Paper",
+      C: "Scissors",
+      D: "Spock",
+      E: "Lizard"
+    }
+    @@rps_links = {
+      A: [ [ "crushes",     :C ], [ "crushes",     :E ] ],
+      B: [ [ "covers",      :A ], [ "disproves",   :D ] ],
+      C: [ [ "cuts",        :B ], [ "decapitates", :E ] ],
+      D: [ [ "smashes",     :C ], [ "vaporizes",   :A ] ],
+      E: [ [ "poisons",     :D ], [ "eats",        :B ] ]
+    }
+
+    def RPSSL.item (choice)
+      return @@rps[choice]
+    end
+
+    def RPSSL.valid? (choice)
+      return @@rps.has_key?(choice)
+    end
+
+    def RPSSL.play
+      return { 1 => :A, 2 => :B, 3 => :C, 4 => :D, 5 => :E }[rand(1..5)]
+    end
+
+    def RPSSL.evaluate ( user, computer )
+      return [ @@rps[user], '==', @@rps[computer], 'DRAW'] if user == computer
+      @@rps_links[user].each do |value, key| # win conditions
+        return [ @@rps[user], value, @@rps[computer], 'WIN'] if key == computer
+      end
+      @@rps_links[computer].each do |value, key| # loose conditions
+        return [ @@rps[computer], value, @@rps[user], 'LOSS'] if key == user
+      end
+    end
+
   end
 
 end
