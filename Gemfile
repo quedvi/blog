@@ -18,6 +18,21 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 #gem 'therubyracer', platforms: :ruby
 
+
+# added by MO ##########################
+
+# linguistics for manipulating words...
+gem 'linguistics'
+# to generate fake data
+gem 'faker'
+# helper gem for pageination
+gem 'kaminari'
+# authentication gem
+gem 'devise'
+# integrate tinyMCE (editor in JS)
+gem 'tinymce-rails'
+#########################################
+
 # to fix the javascript issues on Windows
 gem 'coffee-script-source', '1.8.0'
 

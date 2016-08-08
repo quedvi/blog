@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
 
-  http_basic_authenticate_with name: "test", password: "test", except: [:index, :show]
+  before_filter :authenticate, except: [:index, :show]
 
   def index
-    @articles = Article.all
+    @articles = Article.page(params[:page]).per(5)
   end
 
   def show
@@ -48,5 +48,10 @@ class ArticlesController < ApplicationController
   private
     def article_params
       params.require(:article).permit(:title, :text)
+    end
+
+    # check if the current User is loggend in and Admin
+    def authenticate
+      user_signed_in? && current_user.admin?
     end
 end
