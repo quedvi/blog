@@ -1,12 +1,14 @@
-<h2>Rock-Paper-Scissors-Lizard-Spock</h2>
-<br/>
-
-<%# user input %>
-<b>Your choice:</b><br/>
-
 <table>
   <tr>
-    <td>
+    <td style="height=100px">&nbsp;</td>
+    <td align="center" style="<% if @choice == :A then %>color: #FF6600; <%end%>height=100px"><b>Rock</b></td>
+    <td align="center" style="<% if @choice == :B then %>color: #FF6600; <%end%>height=100px"><b>Paper</b></td>
+    <td align="center" style="<% if @choice == :C then %>color: #FF6600; <%end%>height=100px"><b>Scissors</b></td>
+    <td align="center" style="<% if @choice == :E then %>color: #FF6600; <%end%>height=100px"><b>Lizard</b></td>
+    <td align="center" style="<% if @choice == :D then %>color: #FF6600; <%end%>height=100px"><b>Spock</b></td>
+  <tr>
+    <td><h2><b>Choose:&nbsp;&nbsp;&nbsp;</b></h2></td>
+    <td align="center">
       <p <% if @choice == :A then %>class = "marker_low"<%else%>class = "marker_off"<%end%>>
       <%= link_to(image_tag( "rock.jpg", size: "100x100", alt: "Rock" ), rps_path(choice: :A)) %></p>
     </td>
@@ -27,13 +29,13 @@
       <%= link_to(image_tag( "spock.jpg", size: "100x100", alt: "Spock" ), rps_path(choice: :D)) %></p>
     </td>
   </tr>
-  <tr><td colspan = "5">&nbsp;</td></tr>
-  <tr><td colspan = "5">&nbsp;</td></tr>
 
   <%# output results  %>
   <% if WelcomeHelper::RPSSL.valid?(@choice) then %>
+    <tr><td colspan = "6" style="border-bottom: 2px solid black;">&nbsp;</td></tr>
+    <tr><td colspan = "6">&nbsp;</td></tr>
     <tr>
-      <td><h2><b style="color:
+      <td colspan = "2"><h2><b style="color:
         <% case @results[3] %>
         <% when "WIN"%>
           #008000
@@ -56,7 +58,8 @@
         <%= image_tag( "#{@results[2].downcase}.jpg", size: "100x100", alt: "#{@results[2]}" ) %>
       </td>
     </tr>
+    <tr><td colspan = "6" style="border-bottom: 2px solid black;">&nbsp;</td></tr>
   <% end %>
 </table>
-<br/><br/><br/>
+<br/><br/>
 <%= link_to('Back', controller: 'welcome') %>
