@@ -4,65 +4,69 @@
 <%# user input %>
 <b>Your choice:</b>
 <br/>
-<br/>
-<table>
+
+<style>
+  .border_low { border: none;
+	              border-bottom: 6px double #FF6600;
+              }
+  .border_off { border:none;
+                border-bottom: 6px double #FFFFFF;
+              }
+</style>
+
+<table >
   <tr>
-    <td <% if @choice == :A then %> bgcolor = #000000 <%end%>> </td>
-    <td <% if @choice == :B then %> bgcolor = #000000 <%end%>> </td>
-    <td <% if @choice == :C then %> bgcolor = #000000 <%end%>> </td>
-    <td <% if @choice == :E then %> bgcolor = #000000 <%end%>> </td>
-    <td <% if @choice == :D then %> bgcolor = #000000 <%end%>> </td>
+    <td>
+      <p <% if @choice == :A then %>class = "border_low"<%else%>class = "border_off"<%end%>>
+      <%= link_to(image_tag( "rock.jpg", size: "100x100", alt: "Rock" ), rps_path(choice: :A)) %></p>
+    </td>
+    <td>
+      <p <% if @choice == :B then %>class = "border_low"<%else%>class = "border_off"<%end%>>
+      <%= link_to(image_tag( "paper.jpg", size: "100x100", alt: "Paper" ), rps_path(choice: :B)) %></p>
+    </td>
+    <td>
+      <p <% if @choice == :C then %>class = "border_low"<%else%>class = "border_off"<%end%>>
+      <%= link_to(image_tag( "scissors.jpg", size: "100x100", alt: "Scissors" ), rps_path(choice: :C)) %></p>
+    </td>
+    <td>
+      <p <% if @choice == :E then %>class = "border_low"<%else%>class = "border_off"<%end%>>
+      <%= link_to(image_tag( "lizard.jpg", size: "100x100", alt: "Lizard" ), rps_path(choice: :E)) %></p>
+    </td>
+    <td>
+      <p <% if @choice == :D then %>class = "border_low"<%else%>class = "border_off"<%end%>>
+      <%= link_to(image_tag( "spock.jpg", size: "100x100", alt: "Spock" ), rps_path(choice: :D)) %></p>
+    </td>
   </tr>
-  <tr>
-    <td><%= link_to(image_tag( "rock.jpg", size: "100x100", alt: "Rock" ), rps_path(choice: :A)) %></td>
-    <td><%= link_to(image_tag( "paper.jpg", size: "100x100", alt: "Paper" ), rps_path(choice: :B)) %></td>
-    <td><%= link_to(image_tag( "scissors.jpg", size: "100x100", alt: "Scissors" ), rps_path(choice: :C)) %></td>
-    <td><%= link_to(image_tag( "lizard.jpg", size: "100x100", alt: "Lizard" ), rps_path(choice: :E)) %></td>
-    <td><%= link_to(image_tag( "spock.jpg", size: "100x100", alt: "Spock" ), rps_path(choice: :D)) %></td>
-  </tr>
-  <tr>
-    <td <% if @choice == :A then %> bgcolor = #000000 <%end%>> </td>
-    <td <% if @choice == :B then %> bgcolor = #000000 <%end%>> </td>
-    <td <% if @choice == :C then %> bgcolor = #000000 <%end%>> </td>
-    <td <% if @choice == :E then %> bgcolor = #000000 <%end%>> </td>
-    <td <% if @choice == :D then %> bgcolor = #000000 <%end%>> </td>
-  </tr>
-  <tr><td colspan = "5">&nbsp;</td></tr>
   <tr><td colspan = "5">&nbsp;</td></tr>
   <tr><td colspan = "5">&nbsp;</td></tr>
 
   <%# output results  %>
   <% if WelcomeHelper::RPSSL.valid?(@choice) then %>
     <tr>
-      <td></td>
-      <td <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %> bgcolor = #000000 <%end%>>
-      </td>
-      <td colspan = "2"></td>
-      <td <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %> bgcolor = #000000 <%end%>></td>
-    </tr>
-    <tr>
-      <td><h2><b><%= "#{@results[3]}:" %>&nbsp;&nbsp;</b></h2>
+      <td><h2><b style="color:
+        <% case @results[3] %>
+        <% when "WIN"%>
+          #008000
+        <% when "DRAW"%>
+          #666666
+        <% when "LOSS"%>
+          #FF0000
+        <% end %>
+        "><%= "#{@results[3]}:" %>&nbsp;&nbsp;</b></h2>
       </td>
       <td>
-        <%= image_tag( "#{@results[0].downcase}.jpg", size: "100x100", alt: "#{@results[0]}" ) %>
+        <p <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %>class = "border_low"<%else%>class = "border_off"<%end%>>
+        <%= image_tag( "#{@results[0].downcase}.jpg", size: "100x100", alt: "#{@results[0]}" ) %></p>
       </td>
       <td colspan = "2" align = "center">
         <h2><b><%= "#{@results[1]}" %></b></h2>
       </td>
       <td>
+        <p <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %>class = "border_low"<%else%>class = "border_off"<%end%>>
         <%= image_tag( "#{@results[2].downcase}.jpg", size: "100x100", alt: "#{@results[2]}" ) %>
       </td>
     </tr>
-    <tr>
-      <td></td>
-      <td <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %> bgcolor = #000000 <%end%>>
-      </td>
-      <td colspan = "2"></td>
-      <td <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %> bgcolor = #000000 <%end%>></td>
-    </tr>
   <% end %>
 </table>
-<br/>
-<br/>
-<br/>
+<br/><br/><br/>
 <%= link_to('Back', controller: 'welcome') %>

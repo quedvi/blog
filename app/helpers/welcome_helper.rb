@@ -87,7 +87,7 @@ module WelcomeHelper
   end
 
 
-# helper for Rock-Paper-Scissors-Lizard-Spock
+# helper for Rock-Paper-Scissors-Spock-Lizard
   class RPSSL
     @@rps = {
       A: "Rock",
