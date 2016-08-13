@@ -14,6 +14,12 @@ class WelcomeController < ApplicationController
   end
 
   def rps
+    @selector = { A: "input",
+                  B: "input",
+                  C: "input",
+                  D: "input",
+                  E: "input"
+                }
     @choice = :X
     if params['choice']
       @choice = params['choice'].to_sym
@@ -21,6 +27,7 @@ class WelcomeController < ApplicationController
     @choice_comp = WelcomeHelper::RPSSL.play
     if WelcomeHelper::RPSSL.valid?(@choice)
       @results = WelcomeHelper::RPSSL.evaluate(@choice, @choice_comp)
+      @selector[@choice] = "selected"
     end
   end
 

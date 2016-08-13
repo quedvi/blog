@@ -2,53 +2,134 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$color: #FF6600;
+$font: 'Open Sans', sans-serif; //NimbusSanL, sans-serif; //Tahoma, Geneva, sans-serif;
+$font-extra: 'Chau Philomene One', sans-serif; //Stroke, sans-serif;
+$font-text: 'Source Sans Pro', sans-serif;//'Trirong', serif;
+$height-div: 140px;
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font;
+}
 body {
     margin: 0;
-    padding: 10px;
-    font-family: Verdana;
+    padding: 0;
+    font-family: $font-text;
+}
+
+div.title, div.text {
+  padding: 10px;
+}
+
+#heading {
+  padding: 8px 0 0 8px;
+  color: $color;
+  font-family: $font-extra;
+  font-size: 30px;
+  text-transform: uppercase;
+  float: left;
+}
+
+#description {
+  font-size: 50%;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .floating {
   float: left;
-  text-align: left;
-  width: 110px;
-  height: 125px;
-  margin: 10px;
-  border:2px solid #FFFFFF;
-  border-radius: 9px;
-  text-align: center;
+  width: 102px;
+  height: $height-div;
+  margin: 15px 5px;
+  padding: 3px 0px 8px 3px;
+  border:2px solid rgba(256,256,256,0);
+  border-radius: 4px 40px 16px 16px;
+  color: rgba(256,100,0,0.2);
+  font-family: $font-extra;
 }
 
-.selected {
-  border: 2px solid #FF6600;
+div.selected {
+  border: 2px solid $color;
+  color: $color;//black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.nonfloating {
-  clear: left;
+.computer {
+  border: 2px solid #000000;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: black;
 }
 
-.right {
-  float: right;
-  text-align: right;
-  padding-right: 30px;
+div.input:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: $color;//black;
+}
+
+div.cardhead {
+  padding-bottom: 10px;
+}
+
+img.input {
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  transition: opacity 0.5s;
+}
+
+img.input:hover, img.selected {
+  opacity: 1.0;
+  filter: alpha(opacity=100);
 }
 
 .center {
-    line-height: 125px;
+  line-height: $height-div;
+  color: $color;
+  text-align: center;
 }
 
-.button:link, .button:visited {
+#result {
+  font-size: 150%;
+  text-align: left;
+}
+
+.seperator {
+  clear: both;
+  border-bottom: 1px dashed $color;
+}
+
+.right {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: right;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.button {
+  padding: 2px 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: $font;
+  font-size: 12px;
+  font-stretch: normal;
+  display: inline-block;
+  border: 2px solid $color;
+  border-radius: 4px;
+  &:link, &:visited {
     background-color: #FFFFFF;
-    color: #FF6600;
-    padding: 5px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border: 1px solid #FF6600;
-    border-radius: 5px;
+    color: $color;
+  }
+  &:hover, &:active {
+    background-color: $color;
+    color: white;
+  }
 }
 
-.button:hover, .button:active {
-    background-color: #FF6600;
-    color: white;
+a.no_decoration {
+  &:link, &:visited, &:hover, &:active{
+    color: $color;
+    text-decoration: none;
+  }
 }

@@ -128,4 +128,30 @@ module WelcomeHelper
 
   end
 
+  def card (choice_link, selector)
+    choice_text = RPSSL.item(choice_link)
+
+    card_text  = "<div>"  # includes the whole card
+    card_text += "<div class='cardhead'>#{choice_text}</div>" # card head
+    card_text += "#{image_tag( choice_text.downcase+'.jpg', size: '100x100', alt: choice_text, class: selector[choice_link] )}" # image of card
+    card_text += "</div>"
+
+    card_string  = "<div class='floating #{selector[choice_link]}'>"
+    card_string += "#{link_to(card_text.html_safe, rps_path(choice: choice_link), class: "no_decoration")}"
+    card_string += "</div>"
+    return card_string
+  end
+
+  def result (result_text)
+    case result_text
+      when "WIN"
+        result_color="#008000"
+      when "DRAW"
+        result_color="#666666"
+      when "LOSS"
+        result_color="#FF0000"
+    end
+
+    return "<span style='font-weight: bold; color: "+ result_color+"'>#{result_text}:</span>"
+  end
 end

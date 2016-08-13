@@ -1,17 +1,16 @@
-<p>
-  <strong>Commenter:</strong>
+
+<div class="text">
+  <strong>From:</strong>
   <%= comment.commenter %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
+</div>
+<div class="text">
   <%= comment.body.html_safe %>
-</p>
-
+</div>
 <% if is_admin? then %>
-<p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
+<div class="right">
+  <%= link_to 'delete', [comment.article, comment],
                method: :delete,
-               data: { confirm: 'Are you sure?' } %>
-</p>
+               data: { confirm: 'Are you sure?' }, class: "button" %>
+</div>
 <% end %>
+<div class="seperator"></div>

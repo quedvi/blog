@@ -1,24 +1,35 @@
 <%= tinymce_assets %>
 <%= tinymce %>
 
-<h2>Article</h2>
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+<div class="title">
+  <h2><%= @article.title %></h2>
+</div>
 
-<p>
-  <strong>Text:</strong>
+<div class="text">
   <%= @article.text.html_safe %>
-</p>
+</div>
 
-<h2>Comments</h2>
+<% if is_admin? then %>
+  <div class="right">
+    <%= link_to 'Edit', edit_article_path(@article), class: "button" %>
+  </div>
+<% end %>
+
+<%# skip this part if no comments exist %>
+<div id="comment-heading" class="text">
+  Comments to this article:
+</div>
+<div class="seperator"></div>
+
 <%= render @article.comments %>
 
 <% if is_admin? then %>
-  <h2>Add a comment:</h2>
+  <div id="comment-add" class="text">
+    Add a comment:
+  </div>
   <%= render 'comments/form' %>
-  <%= link_to 'Edit', edit_article_path(@article) %> |
 <% end %>
 
-<%= link_to 'Back', articles_path %>
+<div class="right">
+  <%= link_to 'Back', articles_path, class: "button" %>
+</div>

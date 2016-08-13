@@ -2,67 +2,48 @@
 
 <%# output user input options: %>
 <div>
-  <h2>Choose:</h2>
+  <div id="heading">
+    <span>Choose::</span><span id="description">(Computer auto-plays)</span>
+  </div>
 </div>
+<div class="seperator"></div>
 
-<div class="floating <% if @choice == :A then %>selected<%end%>">
-  Rock<br/>
-  <%= link_to(image_tag( "rock.jpg", size: "100x100", alt: "Rock" ), rps_path(choice: :A)) %>
-</div>
-<div class="floating <% if @choice == :B then %>selected<%end%>">
-  Paper<br/>
-  <%= link_to(image_tag( "paper.jpg", size: "100x100", alt: "Rock" ), rps_path(choice: :B)) %>
-</div>
-<div class="floating <% if @choice == :C then %>selected<%end%>">
-  Scissors<br/>
-  <%= link_to(image_tag( "scissors.jpg", size: "100x100", alt: "Scissors" ), rps_path(choice: :C)) %>
-</div>
-<div class="floating <% if @choice == :E then %>selected<%end%>">
-  Lizard<br/>
-  <%= link_to(image_tag( "lizard.jpg", size: "100x100", alt: "Lizard" ), rps_path(choice: :E)) %>
-</div>
-<div class="floating <% if @choice == :D then %>selected<%end%>">
-  Spock<br/>
-  <%= link_to(image_tag( "spock.jpg", size: "100x100", alt: "Lizard" ), rps_path(choice: :D)) %>
-</div>
+<%# draw input-cards %>
+<%= card(:A, @selector).html_safe %>
+<%= card(:B, @selector).html_safe %>
+<%= card(:C, @selector).html_safe %>
+<%= card(:E, @selector).html_safe %>
+<%= card(:D, @selector).html_safe %>
+<div class="seperator"></div>
 
 <%# output results only if a valid user choice is available%>
 <% if WelcomeHelper::RPSSL.valid?(@choice) %>
 
-  <div class="nonfloating"><br/><br/></div>
-
   <%# change color of result status text depending on outcome %>
-  <div class="floating">
-    <b><span class="center" style="color:
-      <% case @results[3] %>
-      <% when "WIN" %>
-        #008000
-      <% when "DRAW"%>
-        #666666
-      <% when "LOSS"%>
-        #FF0000
-      <% end %>
-    "><%= "#{@results[3]}:" %></span></b>
+  <div class="floating center" id="result">
+    <%=result(@results[3]).html_safe%>
   </div>
   <%# output the winning side (mark if it is the user choice) %>
-  <div class="floating <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %>selected<%end%>">
-    <%= @results[0].to_s %><br/>
-    <%= image_tag( "#{@results[0].downcase}.jpg", size: "100x100", alt: "#{@results[0]}" ) %></p>
+  <div class="floating <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %>selected<%else%>computer<%end%>">
+    <div>
+      <div class="cardhead"><%= @results[0].to_s %></div>
+      <%= image_tag( "#{@results[0].downcase}.jpg", size: "100x100", alt: "#{@results[0]}" ) %></p>
+    </div>
   </div>
   <%# output the verb that connects the winner with the looser %>
-  <div class="floating">
-    <span class="center"><%= "#{@results[1]}" %></span>
+  <div class="floating center">
+    <%= "#{@results[1]}" %>
   </div>
   <%# output the loosing side (mark if it is the user choice) %>
-  <div class="floating <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %>selected<%end%>">
-    <%= @results[2].to_s %><br/>
-    <%= image_tag( "#{@results[2].downcase}.jpg", size: "100x100", alt: "#{@results[2]}" ) %>
+  <div class="floating <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %>selected<%else%>computer<%end%>">
+    <div>
+      <div class="cardhead"><%= @results[2].to_s %></div>
+      <%= image_tag( "#{@results[2].downcase}.jpg", size: "100x100", alt: "#{@results[2]}" ) %>
+    </div>
   </div>
-
+  <div class="seperator"></div>
 <% end %>
 
-<%# output back link %>
-<div class="nonfloating right">
-  <br/>
+<div class="right">
   <%= link_to('back', root_path, class: "button") %>
 </div>
