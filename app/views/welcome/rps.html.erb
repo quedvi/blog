@@ -21,7 +21,7 @@
 
   <%# change color of result status text depending on outcome %>
   <div class="floating center" id="result">
-    <%=result(@results[3]).html_safe%>
+    <%= result(@results[3]).html_safe %>
   </div>
   <%# output the winning side (mark if it is the user choice) %>
   <div class="floating <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %>selected<%else%>computer<%end%>">
@@ -32,7 +32,7 @@
   </div>
   <%# output the verb that connects the winner with the looser %>
   <div class="floating center">
-    <%= "#{@results[1]}" %>
+    <%= @results[1] %>
   </div>
   <%# output the loosing side (mark if it is the user choice) %>
   <div class="floating <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %>selected<%else%>computer<%end%>">

@@ -129,29 +129,28 @@ module WelcomeHelper
   end
 
   def card (choice_link, selector)
-    choice_text = RPSSL.item(choice_link)
+    return "<div class='floating #{selector[choice_link]}'>
+              #{link_to(card_text(choice_link, selector).html_safe, rps_path(choice: choice_link), class: "no_decoration")}
+            </div>"
+  end
 
-    card_text  = "<div>"  # includes the whole card
-    card_text += "<div class='cardhead'>#{choice_text}</div>" # card head
-    card_text += "#{image_tag( choice_text.downcase+'.jpg', size: '100x100', alt: choice_text, class: selector[choice_link] )}" # image of card
-    card_text += "</div>"
-
-    card_string  = "<div class='floating #{selector[choice_link]}'>"
-    card_string += "#{link_to(card_text.html_safe, rps_path(choice: choice_link), class: "no_decoration")}"
-    card_string += "</div>"
-    return card_string
+  def card_text (choice_link, selector)
+    return "<div class=''>
+              <div class='cardhead'>
+                #{RPSSL.item(choice_link)}
+              </div>
+              #{image_tag( RPSSL.item(choice_link).downcase+'.jpg', size: '100x100', alt: RPSSL.item(choice_link), class: selector[choice_link] )}
+            </div>"
   end
 
   def result (result_text)
-    case result_text
-      when "WIN"
-        result_color="#008000"
-      when "DRAW"
-        result_color="#666666"
-      when "LOSS"
-        result_color="#FF0000"
-    end
+    return "<span style='font-weight: bold; color: "+ result_color(result_text)+"'>#{result_text}:</span>"
+  end
 
-    return "<span style='font-weight: bold; color: "+ result_color+"'>#{result_text}:</span>"
+  def result_color(result_text)
+    return "#008000" if result_text == "WIN"
+    return "#666666" if result_text == "DRAW"
+    return "#FF0000" if result_text == "LOSS"
+    return "black"
   end
 end
