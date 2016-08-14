@@ -16,9 +16,11 @@
 <% end %>
 
 <%# skip this part if no comments exist %>
-<div id="comment-heading" class="text">
-  Comments to this article:
-</div>
+<% if @article.comments.count > 1 %>
+  <div id="comment-heading" class="text">
+    Comments to this article:
+  </div>
+<% end %>
 <div class="seperator"></div>
 
 <%= render @article.comments %>
@@ -27,7 +29,9 @@
   <div id="comment-add" class="text">
     Add a comment:
   </div>
-  <%= render 'comments/form' %>
+  <div>
+    <%= render 'comments/form' %>
+  </div>
 <% end %>
 
 <div class="right">

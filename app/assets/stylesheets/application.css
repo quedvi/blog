@@ -14,7 +14,35 @@
  *= require_self
  */
 
+
  /*! to get rid of the stupid border when a link is klicked*/
  a, a:visited, a:focus, a:active, a:hover{
      outline:0 none !important;
+ }
+
+ ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color: #333;
+     position: fixed;
+     top: 0;
+     width: 100%;
+ }
+
+ li {
+     float: left;
+ }
+
+ li a, li span {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+ }
+
+ li a:hover:not(.active) {
+     background-color: #111;
  }

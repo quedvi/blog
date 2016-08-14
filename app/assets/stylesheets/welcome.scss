@@ -140,6 +140,17 @@ a.no_decoration {
   }
 }
 
+a.no_decoration_ {
+  &:link, &:visited, &:active{
+    color: $color;
+    text-decoration: none;
+  }
+  &:hover {
+    color: $color;
+    text-decoration: underline;
+  }
+}
+
 // for calendar
 
 table.MO-cal {

@@ -12,6 +12,23 @@
   </head>
 
   <body>
-    <%= yield %>
+    <ul>
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Blog', articles_path %></li>
+      <li><%= link_to 'RPS', rps_path %></li>
+      <li style="float:right">
+        <% if user_signed_in? then %>
+          <%= link_to 'Logout', destroy_user_session_path,
+                      method: :delete,
+                      data: {confirm: 'Are you sure you want to Logout?'} %>
+        <% else %>
+          <%= link_to 'Login', new_user_session_path %>
+        <% end %>
+      </li>
+      <li style="float:right"><span><%= current_user.email if user_signed_in? %></span></li>
+    </ul>
+    <div style="padding:20px;margin-top:30px;">
+      <%= yield %>
+    </div>
   </body>
 </html>

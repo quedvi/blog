@@ -4,8 +4,72 @@
 
 $color: #FF6600;
 
-input[type=text].forms {
+input[type=text].forms, input[type=password].forms, input[type=email].forms {
   width: 200px;
   border: none;
   border-bottom: 2px solid $color;
+}
+
+#comment-heading {
+  font-size: 75%;
+  font-style: italic;
+  padding-bottom: 0;
+  padding-top: 50px;
+  color: $color;
+}
+
+#comment-add {
+  font-size: 75%;
+  font-style: italic;
+  padding-bottom: 30px;
+  padding-top: 0;
+  color: $color;
+}
+
+span.comment-ago {
+  font-size: 75%;
+  font-style: italic;
+  color: $color;
+}
+
+// custom checkbox
+
+input[type=checkbox].forms {
+	position:absolute;
+  z-index:-1000;
+  left:-1000px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height:1px;
+  width:1px;
+  margin:-1px;
+  padding:0;
+  border:0;
+}
+
+input[type=checkbox].forms + label.forms {
+  padding-left:20px;
+	height:15px;
+	display:inline-block;
+	line-height:12px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	//font-size:30px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+input[type=checkbox].forms:checked + label.forms {
+	background-position: 0 -15px;
+}
+
+label.forms {
+	background-image:url(./checkbox.png);
+  background-size: 15px 30px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
