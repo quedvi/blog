@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_filter :authenticate, except: [:index, :show]
 
   def index
-    @articles = Article.page(params[:page]).per(5)
+    @articles = Article.page(params[:page]).per(10)
   end
 
   def show

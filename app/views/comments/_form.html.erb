@@ -1,14 +1,14 @@
 <%= form_for([@article, @article.comments.build]) do |f| %>
   <p>
-    <%= f.label :commenter %><br>
+    <%= f.label :commenter %>: &nbsp; &nbsp;
     <%= f.text_field :commenter,
-          value: current_user.first_name + ' ' + current_user.last_name %>
+          value: current_user.first_name + ' ' + current_user.last_name, class: 'forms' %>
   </p>
   <p>
     <%= f.label :body %><br>
     <%= f.text_area :body, class: 'tinymce', rows: 10, cols: 50  %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit 'submit', class: 'button' %>
   </p>
 <% end %>

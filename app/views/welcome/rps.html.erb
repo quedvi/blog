@@ -9,11 +9,13 @@
 <div class="seperator"></div>
 
 <%# draw input-cards %>
-<%= card(:A, @selector).html_safe %>
-<%= card(:B, @selector).html_safe %>
-<%= card(:C, @selector).html_safe %>
-<%= card(:E, @selector).html_safe %>
-<%= card(:D, @selector).html_safe %>
+<% [:A, :B, :C, :E, :D].each do |key| %>
+  <% if key == @choice %>
+    <%= card(key, "selected").html_safe %>
+  <% else %>
+    <%= card(key, "input").html_safe %>
+  <% end %>
+<% end %>
 <div class="seperator"></div>
 
 <%# output results only if a valid user choice is available%>
@@ -24,22 +26,16 @@
     <%= result(@results[3]).html_safe %>
   </div>
   <%# output the winning side (mark if it is the user choice) %>
-  <div class="floating <% if @results[0] == WelcomeHelper::RPSSL.item(@choice) then %>selected<%else%>computer<%end%>">
-    <div>
-      <div class="cardhead"><%= @results[0].to_s %></div>
-      <%= image_tag( "#{@results[0].downcase}.jpg", size: "100x100", alt: "#{@results[0]}" ) %></p>
-    </div>
+  <div class="floating <% if @results[0] == @choice then %>selected<%else%>computer<%end%>">
+    <%= card_text(@results[0]).html_safe %>
   </div>
   <%# output the verb that connects the winner with the looser %>
   <div class="floating center">
     <%= @results[1] %>
   </div>
   <%# output the loosing side (mark if it is the user choice) %>
-  <div class="floating <% if @results[2] == WelcomeHelper::RPSSL.item(@choice) && @choice != @choice_comp then %>selected<%else%>computer<%end%>">
-    <div>
-      <div class="cardhead"><%= @results[2].to_s %></div>
-      <%= image_tag( "#{@results[2].downcase}.jpg", size: "100x100", alt: "#{@results[2]}" ) %>
-    </div>
+  <div class="floating <% if @results[2] == @choice && @choice != @choice_comp then %>selected<%else%>computer<%end%>">
+    <%= card_text(@results[2]).html_safe %>
   </div>
   <div class="seperator"></div>
 <% end %>

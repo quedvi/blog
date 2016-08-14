@@ -1,7 +1,7 @@
 
 <div class="text">
-  <strong>From:</strong>
-  <%= comment.commenter %>
+  <strong><%= comment.commenter %></strong>
+  <span class="comment-ago">&nbsp; wrote <%= time_ago_in_words(comment.created_at) %> ago </span>
 </div>
 <div class="text">
   <%= comment.body.html_safe %>

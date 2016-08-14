@@ -15,8 +15,8 @@
   <% end %>
 
   <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.label :title %>: &nbsp;
+    <%= f.text_field :title, class: 'forms' %>
   </p>
 
   <p>
@@ -24,8 +24,8 @@
     <%= f.text_area :text, class: 'tinymce'%>
   </p>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <div>
+    <%= f.submit 'save article', class: 'button' %>
+  </div>
 
 <% end %>

@@ -1,8 +1,25 @@
 <h1>Hello, Rails!</h1>
-<%= link_to 'My Blog', controller: 'articles' %>
-<br/><br/>
-<div class = "mo-calendar">
-  <%= mo_calendar(@year,@month).html_safe %>
+<br/>
+<div>
+  <% if user_signed_in? then %>
+    <%= link_to 'Logout', destroy_user_session_path,
+                method: :delete,
+                data: {confirm: 'Are you sure you want to Logout?'}, class: "button" %>
+    <%= current_user.email %>
+  <% else %>
+    <%= link_to 'Login', new_user_session_path, class: "button" %>
+  <% end %>
+  <br/><br/><br/>
 </div>
-<br/><br/>
-<%= link_to 'Rock-Paper-Scissors?', rps_path %>
+<div class = "mo-calendar">
+  <% size = 220 %>
+  <%= mo_calendar(@year,@month, size, size/7*8).html_safe %>
+</div>
+<div class = "new-line"><br/>
+  <%= link_to('Blog', {controller: 'articles'}, class: "button") %>
+  Continue to Blog?
+</div>
+<div class = "new-line"><br/>
+  <%= link_to 'RPS', rps_path, class: "button" %>
+  Play Rock-Paper-Scissors?
+</div>

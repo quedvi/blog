@@ -12,7 +12,7 @@ include Faker
 # start with empty db?
 # Article.destroy_all
 
-10.times do
+50.times do
   article = Article.create(
               title: Company.bs,
               text:  Lorem.paragraphs(rand(1..5)).join('<br/><br/>')
